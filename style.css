@@ -101,8 +101,11 @@ body { font: 12px -apple-system, "Apple SD Gothic Neo", "Noto Sans KR", sans-ser
 
 /* ---------- 액자 ---------- */
 .frame { left: 0; top: 0; width: 160px; height: 120px; background: #e9e1d2; }
-.frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 2.5s ease; filter: saturate(.94) contrast(1.02); }
-.frame img.show { opacity: 1; }
+/* 사진 전체가 보이도록 contain, 남는 공간은 같은 사진을 흐리게 깔아 채움 */
+.frame .ph { position: absolute; inset: 0; opacity: 0; transition: opacity 2.5s ease; }
+.frame .ph.show { opacity: 1; }
+.frame .ph .bg { position: absolute; inset: -12px; background: center / cover no-repeat; filter: blur(9px) saturate(.85) brightness(.82); }
+.frame .ph img { position: absolute; inset: 7px; width: calc(100% - 14px); height: calc(100% - 14px); object-fit: contain; filter: saturate(.94) contrast(1.02) drop-shadow(0 1px 3px rgba(0,0,0,.35)); }
 .frame-empty[hidden] { display: none; }
 .frame-empty { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; font-size: 11px; color: #8a7d6a; }
 .glass-sheen { position: absolute; inset: 0; background: linear-gradient(125deg, rgba(255,255,255,.28) 0%, rgba(255,255,255,.04) 38%, rgba(255,255,255,0) 60%, rgba(255,255,255,.08) 100%);

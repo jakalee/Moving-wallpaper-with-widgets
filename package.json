@@ -8,12 +8,16 @@
   "scripts": {
     "start": "node server.js",
     "mail-setup": "node scripts/mail-setup.js",
-    "autostart": "zsh scripts/install-autostart.sh"
+    "autostart": "zsh scripts/install-autostart.sh",
+    "demo-gif": "rm -rf .cache/frames && node scripts/record-demo.mjs .cache/frames && ffmpeg -loglevel error -y -framerate 10 -i .cache/frames/f%04d.png -vf \"scale=800:-1:flags=lanczos,split[a][b];[a]palettegen=max_colors=192:stats_mode=diff[p];[b][p]paletteuse=dither=bayer:bayer_scale=4:diff_mode=rectangle\" -loop 0 docs/demo.gif"
   },
   "engines": {
     "node": ">=22.5"
   },
   "dependencies": {
     "imapflow": "^1.0.0"
+  },
+  "devDependencies": {
+    "puppeteer-core": "^25.17.0"
   }
 }

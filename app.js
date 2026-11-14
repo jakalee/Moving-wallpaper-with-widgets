@@ -536,7 +536,30 @@ function startClock() {
 }
 
 /* ---------------- 데이터 ---------------- */
+// ?demo=1 — 개인 데이터 대신 샘플 데이터 (스크린샷·GIF 촬영용)
+function demoData(name) {
+  const t = (h, m) => { const d = new Date(); d.setHours(h, m, 0, 0); return d.toISOString(); };
+  const q = (code, name, price, change, ratio, low, high) => ({ code, name, price: price.toLocaleString('ko-KR'), change, ratio, dir: change > 0 ? 'up' : change < 0 ? 'down' : 'flat', low, high, last: price, volume: '1,204,331', status: 'OPEN' });
+  return {
+    config: { location: LOC },
+    weather: { kind: 'partly', label: '구름 조금', intensity: 0, cloud: 35, wind: 9, temp: 18 },
+    stocks: { updated: new Date().toISOString(), indices: [q('KOSPI', '코스피', 2650.12, 12.3, .47, 0, 0), q('KOSDAQ', '코스닥', 870.55, -3.1, -.36, 0, 0)],
+      items: [q('000001', '하늘전자', 58200, 900, 1.57, 57100, 58900), q('000002', '구름자동차', 102500, -1500, -1.44, 101800, 104600), q('000003', '무지개화학', 33450, 0, 0, 33100, 33800)] },
+    mail: { account: 'me@example.com', todayCount: 5, unread: 2, updated: new Date().toISOString(), items: [
+      { from: '김하늘', subject: '[회의] 다음 주 디자인 리뷰 일정 공유드립니다', date: t(16, 42), seen: false },
+      { from: 'GitHub', subject: 'Your repository has a new star ⭐', date: t(15, 8), seen: false, flagged: true },
+      { from: '이구름', subject: 'RE: 견적서 확인 부탁드립니다', date: t(13, 55), seen: true },
+      { from: '박무지개', subject: '점심 메뉴 투표 결과 🍜', date: t(11, 20), seen: true },
+      { from: 'Newsletter', subject: '이번 주 테크 소식 모음', date: t(8, 3), seen: true }] },
+    agenda: { calendarAccess: true, reminderAccess: true,
+      events: [{ title: '주간 회의', start: t(10, 0), end: t(11, 0) }, { title: '디자인 리뷰', start: t(15, 30), end: t(16, 30) }, { title: '운동 🏃', start: t(19, 0), end: t(20, 0) }],
+      reminders: [{ title: '택배 반품 신청', due: t(18, 0) }, { title: '책 반납하기' }] },
+    photo: { url: 'demo-photo.jpg' },
+    imessage: { message: { id: 1, from: '엄마', text: '저녁 먹었어? 오늘 일찍 들어와~ 🍲', date: new Date().toISOString() }, showMinutes: 60 }
+  }[name];
+}
 async function api(name) {
+  if (params.has('demo')) return structuredClone(demoData(name));
   const r = await fetch('/api/' + name, { cache: 'no-store' });
   if (!r.ok) throw new Error(name + ' ' + r.status);
   return r.json();
@@ -632,8 +655,9 @@ async function loadPhoto() {
   if (!p.url || p.url === photoUrl) return;
   photoUrl = p.url;
   const next = photoFlip ? $('#photo-a') : $('#photo-b'), cur = photoFlip ? $('#photo-b') : $('#photo-a');
-  next.onload = () => { next.classList.add('show'); cur.classList.remove('show'); };
-  next.src = p.url; photoFlip = !photoFlip;
+  const img = next.querySelector('img');
+  img.onload = () => { next.querySelector('.bg').style.backgroundImage = `url("${p.url}")`; next.classList.add('show'); cur.classList.remove('show'); };
+  img.src = p.url; photoFlip = !photoFlip;
 }
 
 // iMessage (15초)

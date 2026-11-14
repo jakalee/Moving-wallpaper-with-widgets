@@ -262,7 +262,7 @@ const imessage = () => cached('imessage', 15_000, async () => {
 
 /* ---------- HTTP ---------- */
 const TYPES = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.png': 'image/png', '.jpg': 'image/jpeg', '.svg': 'image/svg+xml', '.json': 'application/json' };
-const STATIC = new Set(['index.html', 'style.css', 'app.js', 'city-day.png', 'city-night.png', 'sky-mask.png', 'foreground.png', 'foreground-clean.png']);
+const STATIC = new Set(['index.html', 'style.css', 'app.js', 'city-day.png', 'city-night.png', 'sky-mask.png', 'foreground.png', 'foreground-clean.png', 'demo-photo.jpg']);
 const API = { stocks, weather, mail, agenda, photo, imessage,
   config: async () => ({ location: CONFIG.location, stocks: CONFIG.stocks, photoIntervalMinutes: CONFIG.photoIntervalMinutes }) };
 
