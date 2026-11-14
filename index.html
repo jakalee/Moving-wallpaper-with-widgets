@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Penthouse Desk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Gaegu:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script defer src="app.js"></script>
+</head>
+<body>
+<div id="stage">
+<main id="scene" aria-label="펜트하우스 책상 바탕화면">
+
+  <!-- 창밖: 하늘(구름·해·달·별) → 빌딩(낮/밤 교차) → 날씨 → 유리 물방울 -->
+  <canvas id="sky"></canvas>
+  <img class="city night" src="city-night.png" alt="">
+  <img class="city day" src="city-day.png" alt="">
+  <div id="grade"></div>
+  <canvas id="outside"></canvas>
+  <canvas id="glass"></canvas>
+
+  <!-- 소품 화면들 (전경 이미지의 구멍 아래에 놓임) -->
+  <section class="slot monitor" id="mail">
+    <div class="menubar"><span class="apple"></span><b>Mail</b><span>파일</span><span>편집</span><span>보기</span><span>메일상자</span>
+      <span class="spacer"></span><span id="mb-weather"></span><span id="mb-clock"></span></div>
+    <div class="window">
+      <div class="titlebar"><i></i><i></i><i></i>
+        <div class="tb-title"><b>받은 편지함</b><small id="mail-summary">불러오는 중…</small></div>
+        <div class="tb-search">⌕ 검색</div>
+      </div>
+      <div class="mail-body">
+        <aside class="sidebar">
+          <p class="sb-head">즐겨찾기</p>
+          <p class="sb-item on">📥 받은 편지함 <em id="mail-unread"></em></p>
+          <p class="sb-item">⭐ VIP</p>
+          <p class="sb-item">📤 보낸 편지함</p>
+          <p class="sb-item">📝 임시 저장</p>
+          <p class="sb-head">계정</p>
+          <p class="sb-item small" id="mail-account"></p>
+        </aside>
+        <ol class="mail-list" id="mail-list"></ol>
+      </div>
+      <footer class="statusbar" id="mail-status">메일 서버 확인 중…</footer>
+    </div>
+  </section>
+
+  <section class="slot monitor2" id="market">
+    <header class="mk-head">
+      <div><b>관심종목</b><span class="mk-badge" id="mk-state">—</span></div>
+      <div class="mk-updated">업데이트 <time id="mk-updated">--:--:--</time></div>
+    </header>
+    <div class="mk-index" id="mk-index"></div>
+    <div class="mk-rows" id="mk-rows"></div>
+    <footer class="mk-foot"><span>NAVER 증권</span><span id="mk-note"></span></footer>
+  </section>
+
+  <div class="slot clock" id="clock">
+    <svg viewBox="-50 -50 100 100" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <radialGradient id="dial" cx="42%" cy="38%" r="70%">
+          <stop offset="0" stop-color="#fffaf0"/><stop offset=".62" stop-color="#f3e6cc"/><stop offset="1" stop-color="#c9b48c"/>
+        </radialGradient>
+        <radialGradient id="glare" cx="30%" cy="22%" r="60%">
+          <stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset=".45" stop-color="#fff" stop-opacity=".08"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+        </radialGradient>
+        <filter id="hshadow" x="-50%" y="-50%" width="200%" height="200%"><feDropShadow dx="1.1" dy="1.6" stdDeviation=".9" flood-color="#3b2a14" flood-opacity=".45"/></filter>
+      </defs>
+      <circle r="50" fill="url(#dial)"/>
+      <circle r="47.5" fill="none" stroke="#8a6d3f" stroke-opacity=".35" stroke-width=".6"/>
+      <g id="ticks"></g>
+      <g id="numerals" font-family="Didot, 'Bodoni 72', Georgia, serif" font-size="10" fill="#2a211b" text-anchor="middle" dominant-baseline="central"></g>
+      <text y="-17" font-size="4.2" fill="#6a5640" text-anchor="middle" font-family="Didot, Georgia, serif" letter-spacing=".6">QUARTZ</text>
+      <text id="clock-date" y="18" font-size="4.6" fill="#7c2b22" text-anchor="middle" font-family="-apple-system, sans-serif" font-weight="600"></text>
+      <g filter="url(#hshadow)">
+        <path id="h-hour" d="M-2.1 7 L-1.3 -24 L0 -27 L1.3 -24 L2.1 7 Z" fill="#231a14"/>
+        <path id="h-min" d="M-1.5 9 L-.8 -37 L0 -40 L.8 -37 L1.5 9 Z" fill="#231a14"/>
+        <g id="h-sec"><line y1="12" y2="-41" stroke="#b3261e" stroke-width=".8" stroke-linecap="round"/><circle cy="9" r="2" fill="#b3261e"/></g>
+        <circle r="2.6" fill="#2b2019"/><circle r="1.1" fill="#c9a96b"/>
+      </g>
+      <ellipse cx="-8" cy="-14" rx="40" ry="30" fill="url(#glare)"/>
+    </svg>
+  </div>
+
+  <div class="slot calendar" id="calendar">
+    <div class="cal-top"><span id="cal-month">11월</span><small id="cal-year">2026</small></div>
+    <div class="cal-date" id="cal-date">14</div>
+    <div class="cal-dow" id="cal-dow">토요일</div>
+    <div class="cal-next" id="cal-next"></div>
+  </div>
+
+  <div class="slot frame" id="frame">
+    <img id="photo-a" alt=""><img id="photo-b" alt="">
+    <div class="frame-empty" id="photo-empty">사진 폴더를<br>지정하세요</div>
+    <i class="glass-sheen"></i>
+  </div>
+
+  <div class="slot board" id="board">
+    <div class="board-inner">
+      <h2>오늘 할 일 <span id="board-date"></span></h2>
+      <ul id="todo"></ul>
+      <div class="smudge"></div>
+    </div>
+  </div>
+
+  <img class="foreground" src="foreground-clean.png" alt="">
+
+  <!-- 전경 위 조명/효과 -->
+  <div id="roomlight"></div>
+  <div class="glow g1"></div><div class="glow g2"></div>
+  <svg class="steam" viewBox="0 0 60 70" aria-hidden="true">
+    <path d="M30 68 C22 56 38 48 30 36 C22 24 36 16 30 2"/>
+    <path d="M22 68 C14 58 28 50 21 38 C15 28 26 20 22 8"/>
+    <path d="M38 68 C46 56 32 47 39 35 C45 25 34 17 40 6"/>
+  </svg>
+  <div id="flash"></div>
+
+  <div class="bubble" id="bubble" hidden>
+    <div class="bubble-head"><span class="b-ico"></span><b id="bubble-from"></b><time id="bubble-time"></time></div>
+    <p id="bubble-text"></p>
+  </div>
+  <div class="zzz" id="zzz" hidden><span>z</span><span>z</span><span>Z</span></div>
+</main>
+</div>
+
+<form id="debug" hidden>
+  <b>미리보기</b>
+  <label>날씨 <select name="kind"><option value="">실시간</option><option>clear</option><option>partly</option><option>cloudy</option><option>overcast</option><option>drizzle</option><option>rain</option><option>storm</option><option>snow</option><option>sleet</option><option>fog</option></select></label>
+  <label>시각 <input name="hour" type="range" min="-1" max="24" step=".25" value="-1"><output name="hourOut">실시간</output></label>
+  <label>월 <select name="month"><option value="">실시간</option><option value="1">1월</option><option value="4">4월</option><option value="7">7월</option><option value="10">10월</option><option value="12">12월</option></select></label>
+  <button type="button" id="debug-bubble">곰인형 말풍선</button>
+</form>
+</body>
+</html>

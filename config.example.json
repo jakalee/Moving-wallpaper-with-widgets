@@ -1,0 +1,40 @@
+{
+  "port": 8777,
+  "location": {
+    "name": "Seoul",
+    "lat": 37.5665,
+    "lon": 126.978
+  },
+  "stocks": [
+    {
+      "code": "016360",
+      "name": "삼성증권"
+    },
+    {
+      "code": "000270",
+      "name": "기아"
+    },
+    {
+      "code": "005850",
+      "name": "에스엘"
+    }
+  ],
+  "indices": [
+    "KOSPI",
+    "KOSDAQ"
+  ],
+  "photoDir": "~/Pictures",
+  "photoIntervalMinutes": 60,
+  "mail": {
+    "host": "imap.example.com",
+    "port": 993,
+    "secure": true,
+    "user": "you@example.com",
+    "keychainService": "plash-desk-mail",
+    "loginMethod": "LOGIN",
+    "maxItems": 8
+  },
+  "imessage": {
+    "showMinutes": 20
+  }
+}

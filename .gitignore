@@ -1,0 +1,6 @@
+node_modules/
+.cache/
+.claude/
+config.json
+helpers/eventkit
+.DS_Store

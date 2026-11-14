@@ -1,0 +1,19 @@
+{
+  "name": "plash-desk",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Plash용 라이브 바탕화면 - 맨해튼 펜트하우스 책상",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "mail-setup": "node scripts/mail-setup.js",
+    "autostart": "zsh scripts/install-autostart.sh"
+  },
+  "engines": {
+    "node": ">=22.5"
+  },
+  "dependencies": {
+    "imapflow": "^1.0.0"
+  }
+}

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0"><dict>
+<key>CFBundleIdentifier</key><string>local.plash-desk.eventkit</string>
+<key>CFBundleName</key><string>PlashDeskEventKit</string>
+<key>NSCalendarsFullAccessUsageDescription</key><string>바탕화면 탁상 달력에 오늘 일정을 표시합니다.</string>
+<key>NSCalendarsUsageDescription</key><string>바탕화면 탁상 달력에 오늘 일정을 표시합니다.</string>
+<key>NSRemindersFullAccessUsageDescription</key><string>화이트보드에 오늘 할 일을 표시합니다.</string>
+<key>NSRemindersUsageDescription</key><string>화이트보드에 오늘 할 일을 표시합니다.</string>
+</dict></plist>
