@@ -1,4 +1,29 @@
-# 위젯 품은 움직이는 배경화면
+# 위젯 품은 움직이는 배경화면 · Moving Wallpaper with Widgets
+
+> **Turn any image into a personalized, animated macOS desktop with AI.**<br>
+> **원하는 이미지 한 장을 AI와 함께 나만의 움직이는 macOS 배경화면으로 바꿔보세요.**
+
+This repository is not just one finished wallpaper. It is a working example and an AI-customizable starter kit: bring any scene—your room, a cozy café, a seaside cabin, a spaceship—and ask a coding AI to place the widgets and animations you want inside it.
+
+이 저장소는 완성된 배경화면 하나만을 위한 프로젝트가 아닙니다. 맨해튼 펜트하우스는 실제로 동작하는 예제이자 AI 제작용 스타터입니다. 자신의 방, 카페, 바닷가 오두막, 우주선 등 원하는 장면을 준비하고 코딩 AI에게 필요한 위젯과 움직임을 말하면 누구나 자신만의 살아 있는 데스크톱을 만들 수 있습니다.
+
+## The key idea · 핵심 아이디어
+
+1. **Bring any image · 원하는 이미지 준비**<br>
+   Generate a scene with an image AI, use your own artwork, or start from a photo.<br>
+   이미지 생성 AI로 장면을 만들거나 자신의 그림·사진을 준비합니다.
+2. **Describe what you want · 원하는 기능 설명**<br>
+   Ask a coding AI for weather, clocks, calendars, stocks, mail, photos, music, system status, or entirely new interactions.<br>
+   날씨·시계·일정·주식·메일·사진·음악·시스템 상태 등 원하는 기능을 코딩 AI에게 말합니다.
+3. **Let AI adapt the starter · AI로 장면 맞춤 제작**<br>
+   The AI can separate layers, locate widget surfaces, apply perspective transforms, connect data, and add animation using this repository as a working reference.<br>
+   AI가 이 저장소를 참고해 레이어 분리, 위젯 위치 측정, 원근 변환, 데이터 연결과 애니메이션을 구현합니다.
+4. **Run it with Plash · Plash로 실행**<br>
+   Open the local page in [Plash](https://sindresorhus.com/plash) and use your creation as a live macOS wallpaper.<br>
+   완성된 로컬 페이지를 [Plash](https://sindresorhus.com/plash)에 등록하면 나만의 macOS 라이브 배경화면이 됩니다.
+
+**The Manhattan penthouse below is one example—not a limitation.**<br>
+**아래 맨해튼 펜트하우스는 하나의 완성 예제일 뿐, 만들 수 있는 장면의 한계가 아닙니다.**
 
 [Plash](https://sindresorhus.com/plash)로 띄우는 macOS 라이브 바탕화면입니다. 맨해튼 펜트하우스 책상 장면에서 창밖 하늘과 빌딩이 **실제 날씨·시간·계절**에 맞춰 바뀌고, 책상 위 소품에는 **실시간 데이터**가 표시됩니다.
 
