@@ -74,6 +74,8 @@ Plash 메뉴 → *Add Website* → `http://localhost:8777`
 
 로그인할 때 자동 실행: `npm run autostart` (LaunchAgent 등록, 로그는 `.cache/server.log`)
 
+서버가 준비되면 실행 중인 Plash에 `plash:reload` 신호를 보내므로, 재부팅 직후 Plash가 먼저 떠서 "Could not connect to the server"가 떠도 자동으로 복구됩니다. 끄려면 `config.json`에 `"reloadPlashOnStart": false`.
+
 ### 처음 설정
 
 1. **메일 비밀번호** — 파일에 저장하지 않고 macOS 키체인에 넣습니다.

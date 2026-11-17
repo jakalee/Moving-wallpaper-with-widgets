@@ -291,4 +291,15 @@ const server = http.createServer(async (req, res) => {
     send(500, JSON.stringify({ error: e.message }));
   }
 });
-server.listen(CONFIG.port, '127.0.0.1', () => log(`Plash 바탕화면 서버: http://localhost:${CONFIG.port}`));
+// 부팅 직후 Plash가 서버보다 먼저 떠서 "Could not connect" 상태로 멈추는 것을 막기 위해,
+// 서버가 준비되면 실행 중인 Plash에 새로고침 신호를 보낸다 (Plash가 늦게 뜰 경우를 위해 몇 번 반복).
+async function reloadPlash() {
+  try { await run('pgrep', ['-x', 'Plash']); } catch { return false; } // Plash가 안 떠 있으면 건드리지 않음
+  await run('open', ['-g', 'plash:reload']).catch(e => log('Plash 새로고침 실패', e.message));
+  return true;
+}
+server.listen(CONFIG.port, '127.0.0.1', () => {
+  log(`Plash 바탕화면 서버: http://localhost:${CONFIG.port}`);
+  if (CONFIG.reloadPlashOnStart === false) return;
+  for (const s of [2, 20, 60]) setTimeout(() => reloadPlash().then(ok => ok && log(`Plash 새로고침 (${s}초)`)), s * 1000);
+});
